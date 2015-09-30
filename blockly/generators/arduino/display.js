@@ -27,11 +27,13 @@
  * @author gasolin@gmail.com (Fred Lin)
  */
 
+// TODO: do show text, do scroll left, scroll right, up, down, left continuous, right continuous,
+// horizontal, vertical, up continuous, down continuous
 goog.provide('Blockly.Blocks.Adaband');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks['pearl_change'] = {
+Blockly.Blocks['display'] = {
   helpUrl: 'http://arduino.cc/en/Reference/delay',
   init: function() {
     var NUMBERS = [["Number",-1],["1",1],["2",2],["3",3],["4",4],["5",5],["6",6]];
@@ -132,7 +134,7 @@ Blockly.Blocks['pearl_change'] = {
   //   }
 };
 
-Blockly.Blocks['pearl_off'] = {
+Blockly.Blocks['display_scroll_left'] = {
   helpUrl: 'http://arduino.cc/en/Reference/delay',
   init: function() {
 
