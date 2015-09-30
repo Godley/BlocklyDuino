@@ -76,43 +76,14 @@ Blockly.Blocks['pearl_change'] = {
   },
   mutationToDom: function() {
       var container = document.createElement('mutation');
-      var fields = this.getFieldValue('Number');
-      container.setAttribute('items', fields);
-      var max = fields + 1;
-      for (var x = 0; x < max; x++) {
-        var colour_rgb = this.getFieldValue('RGB'+x);
-        //alert(colour_rgb);
-        container.setAttribute('RGB' + x, colour_rgb);
-      }
+
       return container;
     },
     domToMutation: function(xmlElement) {
-      var fields = this.getFieldValue('Number');
-      for (var x = 0; x < this.itemCount_; x++) {
-        this.removeInput('COLOR' + x);
-      }
-      this.itemCount_ = fields;
-      for (var x = 0; x < this.itemCount_; x++) {
-        var color = window.parseInt(xmlElement.getAttribute('RGB'+x), "#00ff00");
-        var input = this.appendDummyInput('COLOR' + x);
-        //if (x == 0) {
-          input.setAlign(Blockly.ALIGN_RIGHT)
-               .appendField("Color "+(x+1))
-               .appendField(new Blockly.FieldColour(color), "RGB" + x);
-        //}
-      }
     },
     decompose: function(workspace) {
       var containerBlock = Blockly.Block.obtain(workspace,
                                                 'project_pearl_container');
-      containerBlock.initSvg();
-      var connection = containerBlock.getInput('STACK').connection;
-      for (var x = 0; x < this.itemCount_; x++) {
-        var itemBlock = Blockly.Block.obtain(workspace, 'project_pearl_number_item');
-        itemBlock.initSvg();
-        connection.connect(itemBlock.previousConnection);
-        connection = itemBlock.nextConnection;
-      }
       return containerBlock;
     },
     compose: function(containerBlock) {
@@ -156,18 +127,6 @@ Blockly.Blocks['pearl_change'] = {
             itemBlock.nextConnection.targetBlock();
       }
     }
-    /*saveConnections: function(containerBlock) {
-      // Store a pointer to any connected child blocks.
-      var itemBlock = containerBlock.getInputTargetBlock('STACK');
-      var x = 0;
-      while (itemBlock) {
-        var input = this.getInput('COLOR' + x);
-        itemBlock.valueConnection_ = input && input.connection.targetConnection;
-        x++;
-        itemBlock = itemBlock.nextConnection &&
-            itemBlock.nextConnection.targetBlock();
-      }
-    }*/
 };
 
 Blockly.Blocks['pearl_off'] = {
